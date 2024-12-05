@@ -1,36 +1,69 @@
-# Revisa AI - Gerador de Flashcards com ChatGPT
+# FlashLearn  
+### Transforme Texto em Conhecimento  
 
-O **Revisa AI** é uma aplicação web que permite aos usuários inserir textos e gerar flashcards automaticamente utilizando a API do ChatGPT. O objetivo da aplicação é transformar textos longos em perguntas e respostas, facilitando o processo de revisão e aprendizado de maneira interativa.
+O **FlashLearn** é uma plataforma inovadora que permite criar flashcards personalizados automaticamente a partir de documentos de texto. Ideal para estudantes e profissionais, o FlashLearn combina inteligência artificial e um design responsivo para facilitar o aprendizado e otimizar seu tempo.  
 
-## Funcionalidades
+---
 
-- **Inserção de Texto:** O usuário pode inserir qualquer texto que deseja estudar.
-- **Geração Automática de Flashcards:** A aplicação usa a API do ChatGPT para processar o texto inserido e gerar flashcards com perguntas e respostas baseadas nas informações chave do conteúdo.
-- **Revisão Interativa:** O usuário pode revisar os flashcards de forma interativa, o que ajuda na memorização do conteúdo.
-- **Customização:** O usuário pode personalizar a geração dos flashcards, como o número de perguntas ou o tipo de conteúdo extraído.
+## 🎯 Objetivo  
+Prover uma ferramenta prática e eficiente para criar flashcards a partir de conteúdos textuais, transformando a maneira como as pessoas estudam e revisam informações.  
 
-## Como Funciona
+---
 
-1. **Entrada de Texto:** O usuário insere um texto na interface do site.
-2. **Processamento com ChatGPT:** O texto é enviado para a API do ChatGPT, que cria perguntas e respostas relevantes baseadas no conteúdo.
-3. **Exibição dos Flashcards:** O sistema exibe os flashcards gerados, permitindo que o usuário revise as informações de forma eficiente e personalizada.
+## 💡 Funcionalidades  
+### Principais:  
+- **Upload de Documentos**: Aceita arquivos em formatos como `.txt`, `.docx` e `.pdf`.  
+- **Geração Automática de Flashcards**: Utiliza a API da OpenAI para identificar trechos importantes e criar flashcards estruturados.  
+- **Organização de Flashcards**: Salve e organize seus flashcards em pastas e categorias.  
+- **Edição Personalizada**: Ajuste conteúdo, títulos e imagens dos flashcards gerados.  
+- **Interface Responsiva**: Funcionalidade garantida em smartphones, tablets e desktops.  
 
-## Tecnologias Usadas
+---
 
-- **Frontend:**
-  - HTML, CSS, JavaScript
-  - Framework: React.js (ou outro framework de sua escolha)
-- **Backend:**
-  - Node.js (ou outro backend, se necessário)
-  - API do ChatGPT para processar os textos e gerar os flashcards
-- **API do ChatGPT:**
-  - Utiliza a OpenAI API para analisar os textos e criar perguntas e respostas automaticamente.
+## 🔧 Tecnologias Utilizadas  
+### **Frontend**  
+- **Tailwind CSS**: Framework de CSS moderno para criar interfaces rápidas e responsivas.  
 
-## Como Rodar o Projeto Localmente
+### **Backend**  
+- **Django**: Framework robusto para gerenciar lógica de negócios e comunicação com APIs.  
 
-Para rodar o projeto localmente em seu computador, siga os passos abaixo:
+### **APIs**  
+- **OpenAI API**: Processamento de texto para geração de flashcards automáticos.  
+- **API de Arte** *(planejada para versões futuras)*: Adição de imagens relevantes aos flashcards.  
 
-### 1. Clonar o Repositório
+---
 
-```bash
-git clone https://github.com/seu-usuario/revisa-ai.git
+## 🚀 Roadmap do Desenvolvimento  
+### **Fase 1 - MVP (Produto Mínimo Viável)**  
+- Funcionalidades principais: upload de documentos, geração automática de flashcards e interface básica.  
+- Lançamento para grupo limitado de usuários para testes e feedback.  
+
+### **Fase 2 - Expansão de Funcionalidades**  
+- Adição de edição avançada, organização de flashcards e integração com APIs de arte.  
+
+### **Fase 3 - Escala e Finalização**  
+- Testes de carga e segurança, lançamento público e suporte técnico completo.  
+
+---
+
+## 🛠️ Contribuindo  
+Contribuições são bem-vindas!  
+1. Faça um fork do projeto.  
+2. Crie uma branch para sua funcionalidade (`git checkout -b feature/nova-funcionalidade`).  
+3. Submeta um pull request para revisão.  
+
+---
+
+## 👥 Equipe de Desenvolvimento  
+- **Lucas Sampaio Leite** - Product Owner  
+- **Marcello Menezes** - Líder Técnico  
+- **Eduardo Santana** - Fullstack Developer  
+- **Isaías Silva** - Fullstack Developer  
+- **Rodrigo Sales** - Front-End Developer  
+- **Severino Murilo da Silva** - Back-End Developer  
+
+---
+
+## 📞 Contato  
+Para mais informações, entre em contato:  
+- **Email**: [meam@cin.ufpe.br]
