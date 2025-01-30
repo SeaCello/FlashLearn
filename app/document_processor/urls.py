@@ -8,6 +8,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # Padrão de URL para upload de documentos
     path('upload/', views.upload_document, name='upload_document'),
+
+    # Padrão de URL para download de documentos
     path('download/<uuid:document_id>/', views.download_document, name='download_document'),
 ]

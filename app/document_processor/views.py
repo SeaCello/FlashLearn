@@ -8,6 +8,9 @@ from .models import Document  # Importando nosso modelo Document
 
 @csrf_exempt
 def upload_document(request):
+    """
+    View responsável por receber o upload de um arquivo e salvá-lo no banco de dados.
+    """
     if request.method != 'POST':
         return JsonResponse({'error': 'Method not allowed'}, status=405)
     
@@ -17,6 +20,7 @@ def upload_document(request):
     file = request.FILES['file']
     
     # Validação do formato do arquivo
+    # Os formatos permitidos para o upload são .txt, .docx e .pdf
     allowed_formats = ['.txt', '.docx', '.pdf']
     file_extension = os.path.splitext(file.name)[1].lower()
     
@@ -26,6 +30,7 @@ def upload_document(request):
         }, status=400)
     
     # Validação do tamanho do arquivo
+    # O tamanho máximo permitido para o upload é de 5MB
     if file.size > settings.MAX_UPLOAD_SIZE:
         return JsonResponse({
             'error': f'File too large. Maximum size is {settings.MAX_UPLOAD_SIZE/1024/1024}MB'
@@ -35,7 +40,8 @@ def upload_document(request):
         # Salvar o documento
         document = Document.objects.create(file=file)
         
-        #TODO: Chamar a API da OpenAI para processar o documento
+        # Chamar a API da OpenAI para processar o documento
+        # TODO: Implementar essa lógica
         with open(f'media/outputs/{document.id}.txt', 'w') as f:
             f.write("Exemplo de output processado")
         
