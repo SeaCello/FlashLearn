@@ -1,0 +1,17 @@
+<!-- filepath: /C:/Users/Eduar/OneDrive/Documentos/GitHub/FileUploads/sample/uploader/templates/uploader/upload_form.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload de Arquivos</title>
+</head>
+<body>
+    <div style="padding:40px;margin:40px;border:1px solid #ccc">
+        <h1>Upload de Arquivos</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+</html>
