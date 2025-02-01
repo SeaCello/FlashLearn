@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FlashLearn</title>
+    <style>
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem; }
+        .cards { display: grid; gap: 1rem; grid-template-columns: repeat(2, 1fr); }
+        .card { 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 8px;
+            min-height: 150px;
+        }
+        form { margin-bottom: 2rem; }
+        .error { color: #dc3545; }
+        .format-info { color: #6c757d; margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FlashLearn</h1>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p class="format-info">Formatos suportados: PDF, DOCX, TXT (até 5MB)</p>
+            {{ form.as_p }}
+            <button type="submit">Gerar</button>
+        </form>
+
+        {% if form.errors %}
+            <div class="error">
+                {% for error in form.errors.values %}
+                    {{ error }}
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% if flashcards %}
+        <div class="cards">
+            {% for card in flashcards %}
+            <div class="card">
+                {{ card }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
