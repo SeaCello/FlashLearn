@@ -1,6 +1,6 @@
 from django import forms
 
-class FlashcardForm(forms.Form):
+class CreateCardForm(forms.Form):
     file = forms.FileField(
         label='Selecione um arquivo',
     )

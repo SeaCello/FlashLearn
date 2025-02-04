@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Criar Flashcards</title>
+    <style>
+        /* Estilos para o container dos flashcards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Grid de 2 colunas */
+            gap: 1rem; /* Espaçamento entre os cards */
+            margin-top: 1rem;
+        }
+
+        /* Estilos para cada flashcard */
+        .card {
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* Estilos para o formulário */
+        form {
+            margin-bottom: 2rem;
+        }
+
+        /* Estilos para o botão */
+        button {
+            background-color: #007bff;
+            color: white; 
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criar Flashcards</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Gerar Flashcards</button>
+    </form>
+
+    {% if flashcards %}
+        <h2>Flashcards Gerados:</h2>
+        <div class="cards">
+            {% for card in flashcards %}
+                <div class="card">
+                    {{ card }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</body>
+</html>

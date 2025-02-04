@@ -16,12 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf.urls.static import static #to server midia files
-from upload import views as upload_views #import views from upload app
 from django.conf import settings 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('upload/',upload_views.UploadView.as_view() ,name='upload'),
-    path('gpt/', include('gpt.urls')),  # include the urls from the gpt app
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) #to server midia files
+    path('', include('home.urls')),  
+    path('flashcards/', include('flashcards.urls')),  
+]
