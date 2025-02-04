@@ -42,6 +42,7 @@
 </head>
 <body>
     <h1>Criar Flashcards</h1>
+    <p>Formatos aceitos: PDF, TXT, DOCX até 5MB.</p>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
@@ -56,6 +57,9 @@
                     {{ card }}
                 </div>
             {% endfor %}
+            <a href="{% url 'download_pdf' %}">
+                <button class="download-btn">Baixar PDF</button>
+            </a>
         </div>
     {% endif %}
 </body>
