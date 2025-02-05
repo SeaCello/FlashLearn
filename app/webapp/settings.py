@@ -31,8 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'home',
+    'flashcards',
     'gpt',
-    'upload',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
