@@ -1,10 +1,11 @@
 # imports for create_flashcards
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import CreateCardForm
 from gpt.api import generate_flashcards
 from gpt.utils import extract_text_from_pdf
 import chardet
 import docx
+
 
 # imports for dowload_pdf
 from django.http import HttpResponse
@@ -13,14 +14,7 @@ from fpdf import FPDF
 def create_flashcards(request):
     """
     Processa o arquivo enviado pelo usuário e gera flashcards a partir do seu conteúdo.
-    
-    Este método verifica a extensão do arquivo:
-    - Se for DOCX, utiliza a biblioteca 'docx' para extrair os parágrafos.
-    - Se for TXT, detecta a codificação com 'chardet' e decodifica o conteúdo.
-    - Se for PDF, utiliza a função extract_text_from_pdf() para extrair o texto.
-    
-    Em seguida, chama a função generate_flashcards() para criar os flashcards,
-    armazena-os na sessão do usuário e exibe a página de criação com os flashcards.
+    Também permite ao usuário editar os flashcards gerados.
     """
     
     flashcards = []
@@ -55,6 +49,11 @@ def create_flashcards(request):
             except Exception as e:
                 form.add_error(None, f"Erro: {str(e)}")
     
+        else:
+            #Edit flashcards
+            flashcards = request.POST.getlist('flashcards')
+            request.session['flashcards'] = flashcards
+
     return render(request, 'flashcards/create_flashcards.html', {
         'form': form,
         'flashcards': flashcards
@@ -104,3 +103,5 @@ def download_pdf(request):
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
+    
+    

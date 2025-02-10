@@ -3,36 +3,53 @@
 <head>
     <title>Criar Flashcards</title>
     <style>
-        /* Estilos para o container dos flashcards */
+        /* Manter os estilos originais do layout */
         .cards {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Grid de 2 colunas */
-            gap: 1rem; /* Espaçamento entre os cards */
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
             margin-top: 1rem;
         }
 
-        /* Estilos para cada flashcard */
         .card {
-            background: #f8f9fa; 
+            background: #f8f9fa;
             border: 1px solid #dee2e6;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            min-height: 100px;
         }
 
-        /* Estilos para o formulário */
+        /* Estilos para o textarea de edição */
+        .card textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            resize: vertical;
+            font-family: inherit;
+            font-size: inherit;
+            padding: 0;
+        }
+
+        .card textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #007bff;
+        }
+
+        /* Manter outros estilos existentes */
         form {
             margin-bottom: 2rem;
         }
 
-        /* Estilos para o botão */
         button {
             background-color: #007bff;
-            color: white; 
+            color: white;
             border: none;
             padding: 0.5rem 1rem;
             border-radius: 4px;
             cursor: pointer;
+            margin-top: 1rem;
         }
 
         button:hover {
@@ -43,6 +60,7 @@
 <body>
     <h1>Criar Flashcards</h1>
     <p>Formatos aceitos: PDF, TXT, DOCX até 5MB.</p>
+    
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
@@ -50,17 +68,51 @@
     </form>
 
     {% if flashcards %}
+        <!-- Formulário de edição com auto-save -->
         <h2>Flashcards Gerados:</h2>
-        <div class="cards">
-            {% for card in flashcards %}
-                <div class="card">
-                    {{ card }}
-                </div>
-            {% endfor %}
-            <a href="{% url 'download_pdf' %}">
-                <button class="download-btn">Baixar PDF</button>
-            </a>
-        </div>
+        <form method="post" id="editForm">
+            {% csrf_token %}
+            <div class="cards">
+                {% for flashcard in flashcards %}
+                    <div class="card">
+                        <textarea name="flashcards" 
+                                oninput="debounceSave()">{{ flashcard }}</textarea>
+                    </div>
+                {% endfor %}
+            </div>
+        </form>
+
+        <a href="{% url 'download_pdf' %}">
+            <button class="download-btn">Baixar PDF</button>
+        </a>
+
+        <script>
+            let timeoutId;
+
+            function debounceSave() {
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => {
+                    const form = document.getElementById('editForm');
+                    const formData = new FormData(form);
+
+                    fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        }
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            console.log('Alterações salvas automaticamente!');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao salvar:', error);
+                    });
+                }, 1000);
+            }
+        </script>
     {% endif %}
 </body>
 </html>

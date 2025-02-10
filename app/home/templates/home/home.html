@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FlashLearn
-    </title>
+    <title>FlashLearn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #000000;
+            position: relative;
+        }
+
+        .nav-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .title-container {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .title {
+            font-size: 64px;
+            color: #ff6b35;
+            text-shadow: 2px 2px 4px rgba(255, 107, 53, 0.3);
+        }
+
+        .button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .login-btn {
+            background-color: #ff9a5c;
+            color: white;
+        }
+
+        .register-btn {
+            background-color: #ff6b35;
+            color: white;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the FlashLearn App</h1>
+    <div class="nav-buttons">
+        <button class="button login-btn">Login</button>
+        <button class="button register-btn">Registrar</button>
+    </div>
+    <div class="title-container">
+        <h1 class="title">FlashLearn</h1>
+    </div>
 </body>
 </html>
