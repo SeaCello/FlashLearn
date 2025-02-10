@@ -21,5 +21,6 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),  
-    path('flashcards/', include('flashcards.urls')),  
+    path('user/', include('user.urls')),
+    path('flashcards/', include('flashcards.urls')),
 ]

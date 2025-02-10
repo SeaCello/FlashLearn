@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import create_flashcards, download_pdf
+from . import views
 
+app_name = 'flashcards'
 
 urlpatterns = [
-    path('', create_flashcards, name='server_flashcards'), # change latter to show flashcards
-    path('create/', create_flashcards, name='create_flashcards'), # create flashcards
-    path('create/download_pdf', download_pdf, name='download_pdf'), # download flashcards
+    path('', views.create_flashcards, name='flashcards'), # change latter to show flashcards
+    path('create/', views.create_flashcards, name='create_flashcards'), # create flashcards
+    path('create/download_pdf', views.download_pdf, name='download_pdf'), # download flashcards
 ]
