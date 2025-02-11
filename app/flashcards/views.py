@@ -6,7 +6,6 @@ from gpt.utils import extract_text_from_pdf
 import chardet
 import docx
 
-
 # imports for dowload_pdf
 from django.http import HttpResponse
 from fpdf import FPDF
@@ -103,5 +102,3 @@ def download_pdf(request):
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
-    
-    
