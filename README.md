@@ -55,15 +55,15 @@ Contribuições são bem-vindas!
 ---
 
 ## 👥 Equipe de Desenvolvimento  
-- **Lucas Sampaio Leite** - Product Owner  
 - **Marcello Menezes** - Líder Técnico  
 - **Eduardo Santana** - Fullstack Developer  
-- **Isaías Silva** - Fullstack Developer  
 - **Rodrigo Sales** - Front-End Developer  
 - **Severino Murilo da Silva** - Back-End Developer  
-
 ---
 
-## 📞 Contato  
-Para mais informações, entre em contato:  
-- **Email**: [meam@cin.ufpe.br]
+
+## Apps Instalados
+user: Gerenciamento de usuários
+home: Página inicial
+flashcards: Sistema de flashcards
+gpt: Integração com GPT
