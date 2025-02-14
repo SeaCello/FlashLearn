@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'django_browser_reload',
+    "crispy_forms",
+    "crispy_tailwind",
 ]
 
 AUTH_USER_MODEL = 'auth.User'  
@@ -147,3 +149,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
