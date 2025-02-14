@@ -5,14 +5,14 @@
     <title>FlashLearn</title>
     {% tailwind_css %}
 </head>
-<body class="bg-white/100 flex items-center justify-center min-h-screen">
+<body>
     <nav class="fixed top-0 left-0 w-full bg-white shadow-md py-3 px-6 flex justify-between items-center z-50">
     
-        <a href="" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+        <a href="{% url 'home' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
     
         
         <div class="space-x-6 hidden md:flex">
-            <!-- <a href="#" class="text-gray-700 hover:text-orange-500">Sobre Nós</a> -->
+            <!-- <a href="#" class="text-gray-700 text-center hover:text-blue-500">Sobre Nós</a> -->
         </div>
     
         <!-- Logout Button -->
@@ -29,9 +29,5 @@
             {% endif %}
         </div>
     </nav>
-    <!-- Product Name -->
-    <div class="text-center space-y-6">
-        <h1 class="animate-pulse text-9xl font-bold text-orange-600">FlashLearn</h1>
-    </div>
+    {% block content %}{% endblock %}
 </body>
-</html>
