@@ -1,3 +1,4 @@
+
 # FlashLearn  
 ### Transforme Texto em Conhecimento  
 
@@ -5,21 +6,18 @@ O **FlashLearn** é uma plataforma inovadora que permite criar flashcards person
 
 ---
 
-## 🎯 Objetivo  
-Prover uma ferramenta prática e eficiente para criar flashcards a partir de conteúdos textuais, transformando a maneira como as pessoas estudam e revisam informações.  
+## 📃 Índice  
+X Tech used
+X Requirements
+X Install instruct
+X usage instruct
+documentation
+visuals
+support info
+project status
+contribution guidelines
 
 ---
-
-## 💡 Funcionalidades  
-### Principais:  
-- **Upload de Documentos**: Aceita arquivos em formatos como `.txt`, `.docx` e `.pdf`.  
-- **Geração Automática de Flashcards**: Utiliza a API da OpenAI para identificar trechos importantes e criar flashcards estruturados.  
-- **Organização de Flashcards**: Salve e organize seus flashcards em pastas e categorias.  
-- **Edição Personalizada**: Ajuste conteúdo, títulos e imagens dos flashcards gerados.  
-- **Interface Responsiva**: Funcionalidade garantida em smartphones, tablets e desktops.  
-
----
-
 ## 🔧 Tecnologias Utilizadas  
 ### **Frontend**  
 - **Tailwind CSS**: Framework de CSS moderno para criar interfaces rápidas e responsivas.  
@@ -29,7 +27,141 @@ Prover uma ferramenta prática e eficiente para criar flashcards a partir de con
 
 ### **APIs**  
 - **OpenAI API**: Processamento de texto para geração de flashcards automáticos.  
-- **API de Arte** *(planejada para versões futuras)*: Adição de imagens relevantes aos flashcards.  
+
+---
+## ⚙️ Requisitos
+Para rodar este projeto, você precisará dos seguintes pré-requisitos:
+
+-   **Sistema Operacional:** Linux, macOS ou Windows.
+    
+-   **Python:** versão 3.8 ou superior.
+    
+-   **Bibliotecas Python:** As bibliotecas listadas em `requirements.txt` precisam ser instaladas.
+
+-   **Banco de Dados:** PostgreSQL 12 ou superior.
+
+---
+### 📦 Instruções de Instalação
+
+Para instalar e configurar este projeto, siga os passos abaixo:
+
+1. **Clone o repositório** para o seu ambiente local:
+
+   ```bash
+   git clone https://github.com/seacello/flashlearn.git
+   ```
+
+2. **Acesse o diretório do projeto:**
+
+   ```bash
+   cd flashlearn
+   ```
+
+3. **Crie um ambiente virtual** (opcional, mas recomendado):
+
+   - Para Python:
+
+     ```bash
+     python -m venv venv
+     ```
+
+   - Para ativar o ambiente virtual:
+
+     - No Linux/macOS:
+
+       ```bash
+       source venv/bin/activate
+       ```
+
+     - No Windows:
+
+       ```bash
+       .\venv\Scripts\activate
+       ```
+
+4. **Instale as dependências** listadas no arquivo `requirements.txt`:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+5. **Crie as migrações do banco de dados** e aplique-as:
+
+   - Para criar as migrações:
+
+     ```bash
+     python manage.py makemigrations
+     ```
+
+   - Para aplicar as migrações:
+
+     ```bash
+     python manage.py migrate
+     ```
+
+6. **Crie um superusuário** (opcional, mas recomendado para acessar o painel administrativo do Django):
+
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+   Siga as instruções para definir nome de usuário, e-mail e senha.
+
+7. **Inicie o servidor de desenvolvimento do Django**:
+
+   ```bash
+   python manage.py runserver
+   ```
+
+8. **Acesse a aplicação**:
+
+   Abra o navegador e vá até `http://127.0.0.1:8000/` para ver a aplicação rodando localmente.
+
+   Para acessar o painel administrativo do Django, vá até `http://127.0.0.1:8000/admin/` e faça login com o superusuário criado.
+
+Após seguir esses passos, o projeto estará pronto para ser utilizado.
+
+---
+
+### ➡️ Instruções de Uso
+
+Após a instalação e configuração do projeto, siga os passos abaixo para utilizar a aplicação:
+
+1. **Acesse o servidor local:**
+   
+   Se o servidor não estiver em execução, inicie-o com o seguinte comando:
+
+   ```bash
+   python manage.py runserver
+   ```
+
+   Isso iniciará o servidor de desenvolvimento do Django no endereço `http://127.0.0.1:8000/`.
+
+2. **Navegue pela aplicação:**
+   
+   Abra o navegador e acesse a URL abaixo para ver a aplicação rodando:
+
+   ```
+   http://127.0.0.1:8000/
+   ```
+
+3. **Acesse o painel administrativo (opcional):**
+   
+   Para acessar o painel administrativo do Django e gerenciar os dados do seu projeto, vá até a seguinte URL:
+
+   ```
+   http://127.0.0.1:8000/admin/
+   ```
+
+   Faça login usando as credenciais do superusuário que você criou anteriormente.
+
+4. **Interaja com a aplicação:**
+   
+   Dependendo das funcionalidades do seu projeto, você poderá realizar operações como criar, editar ou excluir dados, visualizar informações e interagir com diferentes partes da aplicação através da interface web.
+
+5. **Parar o servidor:**
+   
+   Para parar o servidor, basta pressionar **Ctrl + C** no terminal onde o servidor está rodando.
 
 ---
 
