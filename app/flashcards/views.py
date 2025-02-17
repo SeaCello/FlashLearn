@@ -53,7 +53,7 @@ def create_flashcards(request):
             flashcards = request.POST.getlist('flashcards')
             request.session['flashcards'] = flashcards
 
-    return render(request, 'flashcards/create_flashcards.html', {
+    return render(request, 'create_flashcards.html', {
         'form': form,
         'flashcards': flashcards
     })
