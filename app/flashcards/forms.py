@@ -1,8 +1,12 @@
 from django import forms
+from crispy_forms.layout import Layout, Div, Submit
+from crispy_forms.helper import FormHelper
+
 
 class CreateCardForm(forms.Form):
     file = forms.FileField(
-        label='Selecione um arquivo',
+        label='',
+        widget=forms.ClearableFileInput(attrs={'class': 'w-full text-gray-400 font-semibold text-sm bg-white border file:cursor-pointer cursor-pointer file:border-0 file:py-3 file:px-4 file:mr-4 file:bg-gray-100 file:hover:bg-gray-200 file:text-gray-500 rounded'}),
     )
     
     def clean_file(self):
@@ -12,4 +16,3 @@ class CreateCardForm(forms.Form):
         if not file.name.lower().endswith(('.pdf', '.docx', '.txt')):
             raise forms.ValidationError("Formato não suportado")
         return file
-    
