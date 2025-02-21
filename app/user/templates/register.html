@@ -1,98 +1,26 @@
-{% extends "home/base.html" %}
+{% extends "base.html" %}
+{% load tailwind_filters %}
+{% load crispy_forms_tags %}
 {% block content %}
-<div class="form-container">
-    <h2>Registro</h2>
-    <form method="post">
-        {% csrf_token %}
-        <div class="form-fields">
-            {{ form.as_p }}
+<section class="bg-gray-50 dark:bg-gray-900">
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+        <a href="{% url 'home' %}" class="flex items-center mb-6 text-4xl font-semibold text-orange-500 dark:text-white">
+            FlashLearn    
+        </a>
+        <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    Crie sua conta
+                </h1>
+                <form method="POST" class="space-y-4 md:space-y-6" action="">
+                    {% csrf_token %}
+                    {% crispy form %}
+                    <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                        Já tem uma conta? <a href="{% url 'login' %}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Faça login</a>
+                    </p>
+                </form>
+            </div>
         </div>
-        <button type="submit" class="button register-btn">Registrar</button>
-    </form>
-    <div class="form-footer">
-        <p>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
     </div>
-</div>
-
-<style>
-    .form-container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #1a1a1a;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(255, 107, 53, 0.1);
-    }
-
-    .form-container h2 {
-        color: #ff6b35;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .form-fields {
-        margin-bottom: 20px;
-    }
-
-    .form-fields p {
-        margin-bottom: 15px;
-        color: white;
-    }
-
-    .form-fields input {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ff6b35;
-        border-radius: 4px;
-        background-color: #2a2a2a;
-        color: white;
-    }
-
-    .form-fields label {
-        display: block;
-        margin-bottom: 5px;
-        color: #ff9a5c;
-    }
-
-    .button {
-        width: 100%;
-        padding: 10px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: transform 0.2s;
-    }
-
-    .register-btn {
-        background-color: #ff6b35;
-        color: white;
-    }
-
-    .button:hover {
-        transform: scale(1.02);
-    }
-
-    .form-footer {
-        margin-top: 20px;
-        text-align: center;
-        color: #ff9a5c;
-    }
-
-    .form-footer a {
-        color: #ff6b35;
-        text-decoration: none;
-    }
-
-    .form-footer a:hover {
-        text-decoration: underline;
-    }
-
-    .errorlist {
-        color: #ff3b3b;
-        list-style: none;
-        padding: 0;
-        margin: 5px 0;
-    }
-</style>
+  </section>
 {% endblock %}

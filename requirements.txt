@@ -3,3 +3,9 @@ python-docx==0.8.11
 PyPDF2==3.0.1
 fpdf==1.7.2
 chardet==5.2.0
+openai==1.62.0
+python-dotenv==1.0.1
+pymupdf==1.25.3
+django-tailwind==3.8.0
+crispy-tailwind==1.0.3
+django-tailwind[reload]

@@ -23,4 +23,5 @@ urlpatterns = [
     path('', include('home.urls')),  
     path('user/', include('user.urls')),
     path('flashcards/', include('flashcards.urls')),
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
