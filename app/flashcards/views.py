@@ -94,8 +94,10 @@ def download_pdf(request):
             pdf.multi_cell(0, 10, txt=safe_text)
             pdf.ln(8)
 
-        pdf.output(buffer_pdf, 'F') 
+        pdf_bytes = pdf.output(dest='S').encode('latin-1')  # TRANSFORMA O PDF EM BYTES NO FORMATO STRING
+        buffer_pdf.write(pdf_bytes)
         buffer_pdf.seek(0)
+        
         response = HttpResponse(buffer_pdf.getvalue(), content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="flashcards.pdf"'
         return response
