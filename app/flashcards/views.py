@@ -1,10 +1,12 @@
 # imports for create_flashcards
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from .models import UserFlashcard
 from .forms import CreateCardForm
 from gpt.api import generate_flashcards
 from gpt.utils import extract_text_from_pdf
 import chardet
 import docx
+from django.contrib.auth.decorators import login_required
 
 # imports for dowload_pdf
 from django.http import HttpResponse
@@ -44,6 +46,11 @@ def create_flashcards(request):
                 flashcards = generate_flashcards(text)
                 request.session['flashcards'] = flashcards 
 
+                for flashcard in flashcards: # Save flashcards in database
+                    UserFlashcard.objects.create(
+                        user=request.user,
+                        content=flashcard
+                    )
 
             except Exception as e:
                 form.add_error(None, f"Erro: {str(e)}")
@@ -58,7 +65,24 @@ def create_flashcards(request):
         'flashcards': flashcards
     })
     
+
+
+@login_required
+def user_flashcards_home(request):
+    """Página inicial do usuário para gestão de flashcards"""
+    return render(
+        request, 
+        'home_user.html',
+    )
     
+    
+def meus_flashcards(request):
+    """Exibe os flashcards salvos pelo usuário"""
+    user_flashcards = UserFlashcard.objects.filter(user=request.user)
+    return render(request, 'meus_flashcards.html', {
+        'flashcards': user_flashcards
+    })
+
     
 def download_pdf(request):
     """
@@ -104,3 +128,6 @@ def download_pdf(request):
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
+
+
+

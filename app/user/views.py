@@ -15,6 +15,7 @@ def register_view(request):
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
 
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -26,6 +27,8 @@ def login_view(request):
         else:
             messages.error(request, 'Usuário ou senha inválidos.')
     return render(request, 'login.html')
+
+
 
 def logout_view(request):
     logout(request)
