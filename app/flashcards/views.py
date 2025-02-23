@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from fpdf import FPDF
 
+
+@login_required
 def create_flashcards(request):
     """
     Processa o arquivo enviado pelo usuário e gera flashcards a partir do seu conteúdo.
@@ -75,7 +77,8 @@ def user_flashcards_home(request):
         'home_user.html',
     )
     
-    
+
+@login_required
 def meus_flashcards(request):
     """Exibe os flashcards salvos pelo usuário"""
     user_flashcards = UserFlashcard.objects.filter(user=request.user)
@@ -84,6 +87,7 @@ def meus_flashcards(request):
     })
 
     
+@login_required
 def download_pdf(request):
     """
     Recupera os flashcards armazenados na sessão do usuário e gera um documento PDF para download.
@@ -128,6 +132,4 @@ def download_pdf(request):
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
-
-
 
