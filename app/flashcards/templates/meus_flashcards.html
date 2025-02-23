@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Meus Flashcards - StudyFlow{% endblock %}
+
+{% block content %}
+<section class="content-section bg-light">
+    <div class="container px-4 px-lg-5">
+        <!-- Cabeçalho -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10 text-center">
+                <h1 class="display-4">Meus Flashcards</h1>
+                <p class="lead text-muted">Sua coleção pessoal de cartões de estudo</p>
+            </div>
+        </div>
+
+        <!-- Grade de Flashcards -->
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% if flashcards %}
+                {% for flashcard in flashcards %}
+                    <div class="col">
+                        <div class="card h-100 shadow-sm hover-card">
+                            <div class="card-body">
+                                <p class="card-text">{{ flashcard.content }}</p>
+                            </div>
+                            <div class="card-footer bg-transparent border-0">
+                                <small class="text-muted">
+                                    Criado em: {{ flashcard.create_at|date:"d/m/Y" }}
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div class="col-12 text-center">
+                    <div class="alert alert-info" role="alert">
+                        <p class="mb-0">Você ainda não tem flashcards. Que tal criar alguns?</p>
+                        <a href="{% url 'flashcards:create_flashcards' %}" class="btn btn-primary mt-3">
+                            Criar Flashcards <i class="fas fa-plus ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</section>
+
+<style>
+    .hover-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .card {
+        border-radius: 15px;
+        border: none;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+</style>
+{% endblock %}

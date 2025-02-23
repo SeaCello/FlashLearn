@@ -8,8 +8,13 @@
 </head>
 <body>
     <nav class="fixed sticky top-0 inset-x-0 w-full bg-white shadow-md py-3 px-6 flex justify-between items-center z-50">
-    
-        <a href="{% url 'home' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+        
+        
+        {% if user.is_authenticated %}
+            <a href="{% url 'flashcards:home_flashcards' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+        {% else %}
+            <a href="{% url 'home' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+        {% endif %}
     
         
         <div class="space-x-6 hidden md:flex">

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home do Usuário - StudyFlow{% endblock %}
+
+{% block content %}
+<section class="content-section bg-light">
+    <div class="container px-4 px-lg-5 text-center">
+        <!-- Cabeçalho -->
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-lg-10">
+                <h1 class="display-4 mb-5">Bem-vindo! 👋</h1>
+            </div>
+        </div>
+
+
+        <!-- Cards de Ação -->
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <!-- Card Meus Flashcards -->
+            <div class="col-md-6 mb-5">
+                <div class="card h-100 shadow-lg hover-card">
+                    <div class="card-body py-5">
+                        <div class="icon-stack bg-primary text-white mb-4">
+                            <i class="fas fa-layer-group fa-2x"></i>
+                        </div>
+                        <h3 class="card-title mb-3">Meus Flashcards</h3>
+                        <p class="card-text text-muted mb-4">
+                            Revise e gerencie sua coleção atual
+                        </p>
+                        <a href="{% url 'flashcards:my_flashcards' %}" class="btn btn-primary btn-lg">
+                            Acessar Coleção <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Criar Novo -->
+            <div class="col-md-6 mb-5">
+                <div class="card h-100 shadow-lg hover-card">
+                    <div class="card-body py-5">
+                        <div class="icon-stack bg-success text-white mb-4">
+                            <i class="fas fa-plus-circle fa-2x"></i>
+                        </div>
+                        <h3 class="card-title mb-3">Criar Novo Flashcard</h3>
+                        <p class="card-text text-muted mb-4">
+                            Comece um novo conjunto de estudos com nossa IA
+                        </p>
+                        <a href="{% url 'flashcards:create_flashcards' %}" class="btn btn-success btn-lg">
+                            Novo Flashcard <i class="fas fa-magic ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<style>
+    .hover-card {
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    }
+    
+    .hover-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .card {
+        border-radius: 15px;
+        border: none;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+</style>
+
+
+{% endblock %}
