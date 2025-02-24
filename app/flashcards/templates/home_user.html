@@ -1,33 +1,29 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Home do Usuário - StudyFlow{% endblock %}
-
 {% block content %}
-<section class="content-section bg-light">
-    <div class="container px-4 px-lg-5 text-center">
+<section>
+    <div class="py-8 text-center justify-content-center">
         <!-- Cabeçalho -->
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-lg-10">
-                <h1 class="display-4 mb-5">Bem-vindo! 👋</h1>
+                <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Bem-vindo, {{user.username}}!</h1>
             </div>
         </div>
 
-
         <!-- Cards de Ação -->
-        <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="grid grid-cols-2 justify-content-center">
             <!-- Card Meus Flashcards -->
-            <div class="col-md-6 mb-5">
-                <div class="card h-100 shadow-lg hover-card">
+            <div class="rounded-md col-md-6 mb-5 py-8">
+                <div class="card shadow-lg hover-card">
                     <div class="card-body py-5">
                         <div class="icon-stack bg-primary text-white mb-4">
                             <i class="fas fa-layer-group fa-2x"></i>
                         </div>
-                        <h3 class="card-title mb-3">Meus Flashcards</h3>
+                        <h3 class="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Meus Flashcards</h3>
                         <p class="card-text text-muted mb-4">
                             Revise e gerencie sua coleção atual
                         </p>
-                        <a href="{% url 'flashcards:my_flashcards' %}" class="btn btn-primary btn-lg">
+                        <a href="{% url 'flashcards:my_flashcards' %}" class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                             Acessar Coleção <i class="fas fa-arrow-right ms-2"></i>
                         </a>
                     </div>
@@ -35,23 +31,24 @@
             </div>
 
             <!-- Card Criar Novo -->
-            <div class="col-md-6 mb-5">
+            <div class="rounded-md col-md-6 mb-5 py-8">
                 <div class="card h-100 shadow-lg hover-card">
                     <div class="card-body py-5">
                         <div class="icon-stack bg-success text-white mb-4">
                             <i class="fas fa-plus-circle fa-2x"></i>
                         </div>
-                        <h3 class="card-title mb-3">Criar Novo Flashcard</h3>
+                        <h3 class="mb-4 text-4xl font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">Criar Novo Flashcard</h3>
                         <p class="card-text text-muted mb-4">
                             Comece um novo conjunto de estudos com nossa IA
                         </p>
-                        <a href="{% url 'flashcards:create_flashcards' %}" class="btn btn-success btn-lg">
+                        <a href="{% url 'flashcards:create_flashcards' %}" class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                             Novo Flashcard <i class="fas fa-magic ms-2"></i>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        
 
 <style>
     .hover-card {
