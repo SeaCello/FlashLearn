@@ -1,15 +1,19 @@
 # imports for create_flashcards
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from .models import UserFlashcard
 from .forms import CreateCardForm
 from gpt.api import generate_flashcards
 from gpt.utils import extract_text_from_pdf
 import chardet
 import docx
+from django.contrib.auth.decorators import login_required
 
 # imports for dowload_pdf
 from django.http import HttpResponse
 from fpdf import FPDF
 
+
+@login_required
 def create_flashcards(request):
     """
     Processa o arquivo enviado pelo usuário e gera flashcards a partir do seu conteúdo.
@@ -44,6 +48,11 @@ def create_flashcards(request):
                 flashcards = generate_flashcards(text)
                 request.session['flashcards'] = flashcards 
 
+                for flashcard in flashcards: # Save flashcards in database
+                    UserFlashcard.objects.create(
+                        user=request.user,
+                        content=flashcard
+                    )
 
             except Exception as e:
                 form.add_error(None, f"Erro: {str(e)}")
@@ -58,8 +67,27 @@ def create_flashcards(request):
         'flashcards': flashcards
     })
     
+
+
+@login_required
+def user_flashcards_home(request):
+    """Página inicial do usuário para gestão de flashcards"""
+    return render(
+        request, 
+        'home_user.html',
+    )
     
+
+@login_required
+def meus_flashcards(request):
+    """Exibe os flashcards salvos pelo usuário"""
+    user_flashcards = UserFlashcard.objects.filter(user=request.user)
+    return render(request, 'meus_flashcards.html', {
+        'flashcards': user_flashcards
+    })
+
     
+@login_required
 def download_pdf(request):
     """
     Recupera os flashcards armazenados na sessão do usuário e gera um documento PDF para download.
@@ -94,11 +122,14 @@ def download_pdf(request):
             pdf.multi_cell(0, 10, txt=safe_text)
             pdf.ln(8)
 
-        pdf.output(buffer_pdf, 'F') 
+        pdf_bytes = pdf.output(dest='S').encode('latin-1')  # TRANSFORMA O PDF EM BYTES NO FORMATO STRING
+        buffer_pdf.write(pdf_bytes)
         buffer_pdf.seek(0)
+        
         response = HttpResponse(buffer_pdf.getvalue(), content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="flashcards.pdf"'
         return response
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
+
