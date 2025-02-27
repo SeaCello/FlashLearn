@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section class="content-section">
+<section class="content-section pt-8 pb-8">
     <div class="justify-content-center">
         <!-- Cabeçalho -->
         <div class="row justify-content-center mb-5">
@@ -12,13 +12,14 @@
         </div>
 
         <!-- Grade de Flashcards -->
-        <div class="grid grod-cols-3 g-4">
+        <div class="grid grid-cols-3 g-4">
             {% if flashcards %}
                 {% for flashcard in flashcards %}
                     <div class="col">
-                        <div class="card h-100 shadow-sm hover-card">
+                        <div class="card h-100 shadow-sm hover-card group">
                             <div class="card-body">
-                                <p class="card-text">{{ flashcard.title }}</p>
+                                <p class="card-text text-x1 font-semibold">{{ flashcard.title }}</p>
+                                <p class="card-text opacity-0 group-hover:opacity-100 transition-opacity duration-300">{{ flashcard.content }}</p>
                             </div>
                             <div class="card-footer bg-transparent border-0">
                                 <small class="text-muted">
