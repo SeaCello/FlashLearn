@@ -16,10 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.conf import settings 
+from django.conf import settings
+from theme.views import change_mode
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('switch-mode', change_mode, name='change-mode'),
     path('', include('home.urls')),  
     path('user/', include('user.urls')),
     path('flashcards/', include('flashcards.urls')),
