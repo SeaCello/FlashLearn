@@ -18,13 +18,16 @@ def generate_flashcards(text):
                 - Evite usar marcadores ou subtópicos dentro do flashcard
                 - Limite cada flashcard a uma única ideia principal
                 - Use no máximo 50 palavras por flashcard
-                - O conteúdo deve ser autocontido e independente
+                - Limite cada flashcard a uma única ideia principal
                 - Use linguagem simples e direta
+                - Formato: 'Pergunta | Resposta'
                 - Comece cada flashcard com '- '"""
         },
         {
             "role": "user",
-            "content": f"""Analise o texto a seguir e crie 4 flashcards. Cada flashcard deve conter apenas uma informação importante:
+            "content": f"""Analise o texto a seguir e crie 4 flashcards.
+            Cada flashcard deve ter uma pergunta como título e uma resposta:
+:
 
             Texto:
             {text}"""
@@ -35,13 +38,30 @@ def generate_flashcards(text):
             presence_penalty=0.2,
             frequency_penalty=0.3
         )
-        
-        # Processa a resposta
+
+
         raw_content = response.choices[0].message.content
-        flashcards = [line.replace('-', '').strip() 
-                    for line in raw_content.split('\n') 
-                    if line.strip()][:4]
+        flashcards_raw = [line.replace('-', '').strip() 
+                        for line in raw_content.split('\n') 
+                        if line.strip()][:4]
         
+        # Separa título e conteúdo
+        flashcards = []
+        for card in flashcards_raw:
+            parts = card.split('|')
+            if len(parts) == 2:
+                flashcards.append({
+                    'title': parts[0].strip(),
+                    'content': parts[1].strip()
+                })
+            else:
+                flashcards.append({
+                    'title': 'Flashcard',
+                    'content': card
+                })
+        
+
         return flashcards
+    
     except Exception as e:
         raise Exception(f"Erro ao gerar flashcards: {str(e)}")
