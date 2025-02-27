@@ -21,27 +21,11 @@
             <h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Flashcards Gerados:</h2>
             <form method="post" id="editForm">
                 {% csrf_token %}
-                <div class="grid grid-cols-4 justify-between">
+                <div class="grid space-x-4 space-y-4 p-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between">
                     {% for flashcard in flashcards %}
-                        <div class="border rounded-lg p-4 bg-white shadow-sm">
-                            <div class="mb-0">
-                                <!-- Título -->
-                                <textarea 
-                                    class="resize rounded-t-md w-full p-2 font-bold border-b-0" 
-                                    name="flashcard_title_{{ forloop.counter0 }}" 
-                                    oninput="debounceSave()"
-                                    rows="2">{{ flashcard.title }}</textarea>
-                                
-                                <!-- Separador visual -->
-                                <div class="h-[2px] bg-gray-200"></div>
-                                
-                                <!-- Conteúdo -->
-                                <textarea 
-                                    class="resize rounded-b-md w-full p-2 border-t-0" 
-                                    name="flashcard_content_{{ forloop.counter0 }}" 
-                                    oninput="debounceSave()"
-                                    rows="4">{{ flashcard.content }}</textarea>
-                            </div>
+                        <div class="card hover-card py-6 p-4 shadow-lg bg-orange-400">
+                            <textarea class="rounded-md w-full min-h-[150px] bg-transparent border-0" name="flashcards" 
+                                    oninput="debounceSave()">{{ flashcard }}</textarea>
                         </div>
                     {% endfor %}
                 </div>
@@ -50,7 +34,24 @@
             <a href="{% url 'flashcards:download_pdf' %}">
                 <button class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Baixar PDF</button>
             </a>
+            <style>
+                    .hover-card {
+                    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                }
+                
+                .hover-card:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+                }
 
+                .card {
+                    border: none;
+                }
+
+                .card-body {
+                    padding: 1.5rem;
+                }
+            </style>
             <script>
                 let timeoutId;
 
