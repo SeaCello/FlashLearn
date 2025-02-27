@@ -21,11 +21,15 @@
             <h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Flashcards Gerados:</h2>
             <form method="post" id="editForm">
                 {% csrf_token %}
-                <div class="grid space-x-4 space-y-4 p-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 justify-between">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                     {% for flashcard in flashcards %}
                         <div class="card hover-card py-6 p-4 shadow-lg bg-orange-400">
-                            <textarea class="rounded-md w-full min-h-[150px] bg-transparent border-0" name="flashcards" 
-                                    oninput="debounceSave()">{{ flashcard }}</textarea>
+                            <!-- Textarea para o título -->
+                            <textarea class="rounded-md w-full min-h-[60px] bg-transparent border-0 font-bold text-lg mb-2" name = "flashcard_title"
+                                oninput="debounceSave()">{{ flashcard.title }}</textarea>
+                            <!-- Textarea para o conteúdo -->
+                            <textarea class="rounded-md w-full min-h-[100px] bg-transparent border-0" name = "flashcard_content"
+                                oninput="debounceSave()">{{ flashcard.content}}</textarea>
                         </div>
                     {% endfor %}
                 </div>
