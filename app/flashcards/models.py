@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 
 class UserFlashcard(models.Model):
     user  = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_flashcards')
+    title = models.CharField(max_length= 255, blank=True)
     content = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)
     

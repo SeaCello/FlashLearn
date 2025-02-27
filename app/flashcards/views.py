@@ -51,7 +51,8 @@ def create_flashcards(request):
                 for flashcard in flashcards: # Save flashcards in database
                     UserFlashcard.objects.create(
                         user=request.user,
-                        content=flashcard
+                        title=flashcard['title'],
+                        content=flashcard['content']
                     )
 
             except Exception as e:
@@ -117,13 +118,22 @@ def download_pdf(request):
 
         pdf.set_font("Arial", size=12)
         for idx, card in enumerate(flashcards, 1):
-            texto = f"{idx}. {card}"
-            safe_text = texto.encode('latin-1', 'replace').decode('latin-1')
-            pdf.multi_cell(0, 10, txt=safe_text)
-            pdf.ln(8)
-
-        pdf_bytes = pdf.output(dest='S').encode('latin-1')  # TRANSFORMA O PDF EM BYTES NO FORMATO STRING
-        buffer_pdf.write(pdf_bytes)
+            # Título
+            pdf.set_font("Arial", 'B', 12)
+            titulo = f"{idx}. {card['title']}"
+            safe_titulo = titulo.encode('latin-1', 'replace').decode('latin-1')
+            pdf.multi_cell(0, 10, txt=safe_titulo)
+            
+            # Conteúdo
+            pdf.set_font("Arial", '', 12)
+            conteudo = f"{card['content']}"
+            safe_conteudo = conteudo.encode('latin-1', 'replace').decode('latin-1')
+            pdf.multi_cell(0, 10, txt=safe_conteudo)
+            
+            pdf.ln(5)
+        
+        pdf_content = pdf.output(dest='S').encode('latin-1')
+        buffer_pdf.write(pdf_content)
         buffer_pdf.seek(0)
         
         response = HttpResponse(buffer_pdf.getvalue(), content_type='application/pdf')

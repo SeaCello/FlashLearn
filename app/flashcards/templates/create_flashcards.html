@@ -23,9 +23,25 @@
                 {% csrf_token %}
                 <div class="grid grid-cols-4 justify-between">
                     {% for flashcard in flashcards %}
-                        <div>
-                            <textarea class="resize rounded-md w-full min-h-[150px]" name="flashcards" 
-                                    oninput="debounceSave()">{{ flashcard }}</textarea>
+                        <div class="border rounded-lg p-4 bg-white shadow-sm">
+                            <div class="mb-0">
+                                <!-- Título -->
+                                <textarea 
+                                    class="resize rounded-t-md w-full p-2 font-bold border-b-0" 
+                                    name="flashcard_title_{{ forloop.counter0 }}" 
+                                    oninput="debounceSave()"
+                                    rows="2">{{ flashcard.title }}</textarea>
+                                
+                                <!-- Separador visual -->
+                                <div class="h-[2px] bg-gray-200"></div>
+                                
+                                <!-- Conteúdo -->
+                                <textarea 
+                                    class="resize rounded-b-md w-full p-2 border-t-0" 
+                                    name="flashcard_content_{{ forloop.counter0 }}" 
+                                    oninput="debounceSave()"
+                                    rows="4">{{ flashcard.content }}</textarea>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
