@@ -1,25 +1,36 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="pt-br" class="{% if is_dark_theme %}dark{% endif %}">
+<html lang="pt-br" class = "h-full">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {},
+            }
+        }
+    </script>
     <title>FlashLearn</title>
     {% tailwind_css %}
 </head>
-<body class="dark:bg-gray-700/100">
-    <nav class="fixed sticky top-0 inset-x-0 w-full bg-white shadow-md py-3 px-6 flex justify-between items-center z-50 dark:bg-gray-700/100">
+<body class="dark:bg-gray-700/100 flex flex-col min-h-screen">
+  <nav class="fixed sticky top-0 inset-x-0 w-full bg-white shadow-md py-3 px-6 flex justify-between items-center z-50 dark:bg-gray-700/100">
         
         
-        {% if user.is_authenticated %}
-            <a href="{% url 'flashcards:home_flashcards' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
-        {% else %}
-            <a href="{% url 'home' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
-        {% endif %}
-    
-        
+        <div class="flex items-center">
+          {% if user.is_authenticated %}
+              <a href="{% url 'flashcards:home_flashcards' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+          {% else %}
+              <a href="{% url 'home' %}" class="text-xl font-bold text-orange-600 hover:text-red-500">FlashLearn</a>
+          {% endif %}
+          
+          <!-- Logo ao lado do texto FlashLearn -->
+          <img src="{% static 'images/Logo.jpeg' %}" alt="FlashLearn Logo" class="h-8 ml-2">
+        </div>
         <!-- <div class="space-x-6 hidden md:flex">
             <a href="#" class="text-gray-700 text-center hover:text-blue-500">Sobre Nós</a>
-        </div> -->
+        </div> --> 
     
         <!-- Logout Button -->
         <div>
@@ -35,53 +46,51 @@
             {% endif %}
         </div>
     </nav>
-    <div class="fixed bottom-4 right-4">
-        <a href="{% url 'change-mode' %}" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-          </a>
-    </div>
-    <script>
-        // Dark mode toggle functionality
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const html = document.documentElement;
 
-        darkModeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-        });
+    <!-- Dark mode toggle button -->
+    <div class="fixed bottom-4 right-4 z-50">
+      <button id="darkModeToggle" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+      </button>
+    </div>
+    
+    <script>
+      // Dark mode toggle functionality
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const html = document.documentElement;
+  
+      // Verifica se há preferência salva
+      const darkModeSaved = localStorage.getItem('darkMode') === 'true';
+      if (darkModeSaved) {
+          html.classList.add('dark');
+      }
+  
+      darkModeToggle.addEventListener('click', () => {
+          html.classList.toggle('dark');
+          // Salva a preferência no localStorage
+          localStorage.setItem('darkMode', html.classList.contains('dark'));
+      });
     </script>
-    {% block content %}{% endblock %}
-    <footer class="py-2">
-        <div class="py-4 bg-orange-600 text-white">
+    <!-- Conteúdo principal com flex-grow para ocupar espaço disponível -->
+    <main class="flex-grow">
+      {% block content %}{% endblock %}
+    </main>
+    <footer class="mt-auto">
+      <div class="py-4 bg-orange-600 text-white">
           <div class="container px-4 mx-auto">
             <div class="-mx-4 flex flex-wrap justify-between">
               <div class="px-4 my-4 w-full xl:w-1/5">
-                <a href="/" class="block w-56 mb-10">
-                  <svg version="1.1" viewBox="0 0 3368 512" xmlns="http://www.w3.org/2000/svg">
-                    <g fill="none" fill-rule="evenodd">
-                      <g transform="translate(0 -75)">
-                        <g transform="translate(0 75)">
-                          <rect width="512" height="512" rx="128" fill="#3D5AFE"></rect>
-                          <rect x="149" y="176" width="220" height="220" fill="#fff"></rect>
-                          <circle cx="259" cy="156" r="40" fill="#fff"></circle>
-                          <circle cx="369" cy="286" r="40" fill="#2962FF"></circle>
-                        </g>
-                        <text fill="white" font-size="512" font-weight="bold">
-                          <tspan x="654" y="518">FlashLearn</tspan>
-                        </text>
-                      </g>
-                    </g>
-                  </svg>
-                </a>
+                <a href="/" class="block w-56 mb-10 text-4xl font-semibold">Flashlearn</a> 
                 <p class="text-justify">
-                  Tailwindow is a collection of UI Components created using Tailwind CSS Framework. The UI Components gives you all of the building blocks you need to build any designs without any annoying opinionated styles you have to fight to override.
+                  O FlashLearn é uma plataforma inovadora que cria flashcards personalizados a partir de textos. Combinando inteligência artificial e design responsivo, ela facilita o aprendizado e otimiza o tempo de estudantes e profissionais.
                 </p>
               </div>
     
               <div class="px-4 my-4 w-full sm:w-auto">
                 <div>
-                  <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-white">Company</h2>
+                  <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-white">Empresa</h2>
                 </div>
                 <ul class="leading-8">
                   <li><a href="#" class="hover:text-blue-400">Sobre Nós</a></li>
@@ -89,7 +98,7 @@
               </div>
               <div class="px-4 my-4 w-full sm:w-auto xl:w-1/5">
                 <div>
-                  <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-white">Connect With Us</h2>
+                  <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-white">Fale Conosco</h2>
                 </div>
                 <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
                   <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
