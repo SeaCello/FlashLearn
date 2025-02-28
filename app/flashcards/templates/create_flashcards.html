@@ -23,13 +23,15 @@
                 {% csrf_token %}
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                     {% for flashcard in flashcards %}
-                        <div class="card hover-card py-6 p-4 shadow-lg bg-orange-400">
+                        <div class="card hover-card py-6 p-4 shadow-lg bg-orange-400 group">
                             <!-- Textarea para o título -->
-                            <textarea class="rounded-md w-full min-h-[60px] bg-transparent border-0 font-bold text-lg mb-2" name = "flashcard_title"
-                                oninput="debounceSave()">{{ flashcard.title }}</textarea>
+                            <textarea class="rounded-md w-full min-h-[60px] bg-transparent border-0 font-bold text-lg mb-2" 
+                                    name="flashcard_title"
+                                    oninput="debounceSave()">{{ flashcard.title }}</textarea>
                             <!-- Textarea para o conteúdo -->
-                            <textarea class="rounded-md w-full min-h-[100px] bg-transparent border-0" name = "flashcard_content"
-                                oninput="debounceSave()">{{ flashcard.content}}</textarea>
+                            <textarea class="rounded-md w-full min-h-[100px] bg-transparent border-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                                    name="flashcard_content"
+                                    oninput="debounceSave()">{{ flashcard.content}}</textarea>
                         </div>
                     {% endfor %}
                 </div>
@@ -39,8 +41,9 @@
                 <button class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">Baixar PDF</button>
             </a>
             <style>
-                    .hover-card {
+                .hover-card {
                     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+                    border-radius: 15px;
                 }
                 
                 .hover-card:hover {
@@ -54,6 +57,15 @@
 
                 .card-body {
                     padding: 1.5rem;
+                }
+
+                textarea {
+                    transition: opacity 0.3s;
+                }
+                
+                textarea:focus {
+                    opacity: 1 !important;
+                    outline: none;
                 }
             </style>
             <script>
