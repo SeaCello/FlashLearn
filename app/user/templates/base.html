@@ -1,8 +1,16 @@
 {% load static tailwind_tags %}
 <!DOCTYPE html>
-<html lang="pt-br" class="{% if is_dark_theme %}dark{% endif %} h-full">
+<html lang="pt-br" class = "h-full">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {},
+            }
+        }
+    </script>
     <title>FlashLearn</title>
     {% tailwind_css %}
 </head>
@@ -38,21 +46,32 @@
             {% endif %}
         </div>
     </nav>
-    <div class="fixed bottom-4 right-4">
-        <a href="{% url 'change-mode' %}" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
-            </svg>
-          </a>
-    </div>
-    <script>
-        // Dark mode toggle functionality
-        const darkModeToggle = document.getElementById('darkModeToggle');
-        const html = document.documentElement;
 
-        darkModeToggle.addEventListener('click', () => {
-            html.classList.toggle('dark');
-        });
+    <!-- Dark mode toggle button -->
+    <div class="fixed bottom-4 right-4 z-50">
+      <button id="darkModeToggle" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+      </button>
+    </div>
+    
+    <script>
+      // Dark mode toggle functionality
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      const html = document.documentElement;
+  
+      // Verifica se há preferência salva
+      const darkModeSaved = localStorage.getItem('darkMode') === 'true';
+      if (darkModeSaved) {
+          html.classList.add('dark');
+      }
+  
+      darkModeToggle.addEventListener('click', () => {
+          html.classList.toggle('dark');
+          // Salva a preferência no localStorage
+          localStorage.setItem('darkMode', html.classList.contains('dark'));
+      });
     </script>
     <!-- Conteúdo principal com flex-grow para ocupar espaço disponível -->
     <main class="flex-grow">
