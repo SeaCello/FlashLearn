@@ -12,36 +12,39 @@
         </div>
 
         <!-- Grade de Flashcards -->
-        <div class="grid grid-cols-3 g-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
             {% if flashcards %}
                 {% for flashcard in flashcards %}
-                    <div class="col">
-                        <div class="card h-100 shadow-sm hover-card group">
-                            <div class="card-body">
-                                <p class="card-text text-x1 font-semibold">{{ flashcard.title }}</p>
-                                <p class="card-text opacity-0 group-hover:opacity-100 transition-opacity duration-300">{{ flashcard.content }}</p>
-                            </div>
-                            <div class="card-footer bg-transparent border-0">
-                                <small class="text-muted">
-                                    Criado em: {{ flashcard.create_at|date:"d/m/Y" }}
-                                </small>
+                    <div class="w-full">
+                        <div class="card h-full shadow-sm hover-card group bg-white dark:bg-gray-800">
+                            <div class="card-body flex flex-col justify-between h-full">
+                                <div class="flex-grow">
+                                    <p class="card-text text-xl font-semibold mb-3 text-gray-900 dark:text-white">{{ flashcard.title }}</p>
+                                    <p class="card-text opacity-0 group-hover:opacity-100 transition-opacity duration-300 text-gray-600 dark:text-gray-300">{{ flashcard.content }}</p>
+                                </div>
+                                <div class="mt-auto">
+                                    <small class="text-muted dark:text-gray-400">
+                                        Criado em: {{ flashcard.create_at|date:"d/m/Y" }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
             {% else %}
-                <div class="card py-4 col-12 text-center h-100 shadow-sm hover-card">
+                <div class="col-span-3 w-full">
+                    <div class="card py-4 col-12 text-center h-100 shadow-sm hover-card">
                     <div class="alert alert-info" role="alert">
                         <p class="py-4">Você ainda não tem flashcards. Que tal criar alguns?</p>
                         <a href="{% url 'flashcards:create_flashcards' %}" class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                             Criar Flashcards <i class="fas fa-plus ms-2"></i>
                         </a>
                     </div>
+                    </div>
                 </div>
             {% endif %}
         </div>
     </div>
-
 </section>
 
 <style>
