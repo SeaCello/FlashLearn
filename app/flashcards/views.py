@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import UserFlashcard
 from .forms import CreateCardForm
 from gpt.api import generate_flashcards
-from gpt.utils import extract_text_from_pdf
+import fitz
 import chardet
 import docx
 from django.contrib.auth.decorators import login_required
@@ -67,8 +67,11 @@ def process_file_upload(request):
     file = request.FILES['file']
     
     # Extrair texto do arquivo
-    if file.name.lower().endswith('.pdf'): 
-        text = extract_text_from_pdf(file)[:6000]
+    if file.name.lower().endswith('.pdf'):
+        text = ""
+        with fitz.open(stream=file.read(), filetype="pdf" as doc):
+            for page in doc:
+                text += page.get_text()
     elif file.name.lower().endswith('.docx'): 
         doc = docx.Document(file)
         text = '\n'.join([p.text for p in doc.paragraphs])[:6000]
