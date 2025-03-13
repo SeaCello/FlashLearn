@@ -68,7 +68,9 @@ def create_flashcards(request):
 
 @login_required
 def user_flashcards_home(request):
-    """Página inicial do usuário para gestão de flashcards"""
+    """
+    User's home page for flashcard management.
+    """
     return render(
         request, 
         'home_user.html',
@@ -77,7 +79,9 @@ def user_flashcards_home(request):
 
 @login_required
 def meus_flashcards(request):
-    """Exibe os flashcards salvos pelo usuário"""
+    """
+    Displays the flashcards saved by the user.
+    """
     user_flashcards = UserFlashcard.objects.filter(user=request.user)
     return render(request, 'meus_flashcards.html', {
         'flashcards': user_flashcards
