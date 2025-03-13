@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %} - Sobre Nós{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-16">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl font-bold text-gray-800 dark:text-white mb-8">Sobre o FlashLearn</h1>
+        
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-10">
+            <h2 class="text-2xl font-semibold text-orange-600 dark:text-orange-400 mb-4">Nossa Missão</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-6">
+                O FlashLearn foi criado com uma missão clara: transformar a maneira como as pessoas estudam e aprendem através da tecnologia. 
+                Acreditamos que o aprendizado deve ser eficiente, personalizado e adaptado às necessidades individuais de cada estudante.
+            </p>
+            
+            <h2 class="text-2xl font-semibold text-orange-600 dark:text-orange-400 mb-4">Como Funciona</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                Nossa plataforma utiliza inteligência artificial avançada para analisar textos e criar flashcards personalizados que destacam
+                os conceitos mais importantes. Nosso sistema é projetado para:
+            </p>
+            
+            <ul class="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-300">
+                <li class="mb-2">Extrair conceitos-chave de qualquer texto</li>
+                <li class="mb-2">Criar perguntas e respostas que testarão seu conhecimento</li>
+                <li class="mb-2">Organizar o conteúdo de forma lógica e estruturada</li>
+                <li class="mb-2">Adaptar-se ao seu progresso de aprendizado</li>
+            </ul>
+            
+            <h2 class="text-2xl font-semibold text-orange-600 dark:text-orange-400 mb-4">Nossa Equipe</h2>
+            <p class="text-gray-700 dark:text-gray-300">
+                Somos uma equipe de desenvolvedores e educadores apaixonados por aprendizado. Combinamos conhecimentos 
+                em desenvolvimento de software, design de interface, psicologia educacional e inteligência artificial 
+                para criar uma plataforma que realmente faz a diferença na jornada educacional dos nossos usuários.
+            </p>
+        </div>
+        
+        <div class="bg-orange-100 dark:bg-gray-700 rounded-lg p-6">
+            <h2 class="text-2xl font-semibold text-orange-600 dark:text-orange-400 mb-4">Entre em Contato</h2>
+            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                Tem perguntas, sugestões ou feedback? Adoraríamos ouvir de você!
+            </p>
+            <p class="text-gray-700 dark:text-gray-300">
+                Email: <a href="mailto:contato@flashlearn.com" class="text-orange-600 dark:text-orange-400 hover:underline">contato@flashlearn.com</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

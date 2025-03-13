@@ -8,8 +8,7 @@ class UserFlashcard(models.Model):
     title = models.CharField(max_length= 255, blank=True)
     content = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)
-    
-    
+
     class Meta:
         ordering = ['-create_at']
         
