@@ -21,7 +21,6 @@ def create_flashcards(request):
         - If no file is uploaded, retrieves flashcards from the session.
     """
 
-    
     form = CreateCardForm()
     is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
     
@@ -71,6 +70,7 @@ def user_flashcards_home(request):
     """
     User's home page for flashcard management.
     """
+    
     return render(
         request, 
         'home_user.html',
@@ -82,6 +82,7 @@ def meus_flashcards(request):
     """
     Displays the flashcards saved by the user.
     """
+    
     user_flashcards = UserFlashcard.objects.filter(user=request.user)
     return render(request, 'meus_flashcards.html', {
         'flashcards': user_flashcards
@@ -98,6 +99,7 @@ def download_pdf(request):
     
     If no flashcards are found for the user, an appropriate message is returned.
     """
+    
     user_flashcards = UserFlashcard.objects.filter(user=request.user).order_by('-id')[:4]
     
     if not user_flashcards:
