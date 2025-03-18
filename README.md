@@ -1,4 +1,3 @@
-
 # FlashLearn  
 ### Transforme Texto em Conhecimento  
 
@@ -7,15 +6,17 @@ O **FlashLearn** é uma plataforma inovadora que permite criar flashcards person
 ---
 
 ## 📃 Índice  
-X Tech used
-X Requirements
-X Install instruct
-X usage instruct
-documentation
-visuals
-support info
-project status
-contribution guidelines
+  
+1. [🔧 Tecnologias Utilizadas](#-tecnologias-utilizadas)  
+2. [⚙️ Requisitos](#️-requisitos)  
+3. [📦 Instalação](#-instruções-de-instalação)  
+4. [➡️ Instruções de Uso](#️-instruções-de-uso)  
+5. [📖 Documentação](#-documentação)  
+6. [🖼️ Imagens e Visuais](#-imagens-e-visuais)  
+7. [🆘 Informações de Suporte](#-informações-de-suporte)  
+8. [📌 Status do Projeto](#-status-do-projeto)  
+9. [🤝 Diretrizes para Contribuição](#-diretrizes-para-contribuição)  
+10. [👥 Equipe de Desenvolvimento](#-equipe-de-desenvolvimento)  
 
 ---
 ## 🔧 Tecnologias Utilizadas  
@@ -82,38 +83,49 @@ Para instalar e configurar este projeto, siga os passos abaixo:
 4. **Instale as dependências** listadas no arquivo `requirements.txt`:
 
    ```bash
-   pip install -r requirements.txt
+   pip install -r .\requirements.txt
    ```
-
-5. **Crie as migrações do banco de dados** e aplique-as:
+   
+5. **Instale o Tailwind CSS**:
+	```bash
+	python .\app\manage.py tailwind install
+	```
+	
+6. **Crie as migrações do banco de dados** e aplique-as:
 
    - Para criar as migrações:
 
      ```bash
-     python manage.py makemigrations
+     python .\app\manage.py makemigrations
      ```
 
    - Para aplicar as migrações:
 
      ```bash
-     python manage.py migrate
+     python .\app\manage.py migrate
      ```
 
-6. **Crie um superusuário** (opcional, mas recomendado para acessar o painel administrativo do Django):
+7. **Crie um superusuário** (opcional, mas recomendado para acessar o painel administrativo do Django):
 
    ```bash
-   python manage.py createsuperuser
+   python .\app\manage.py createsuperuser
    ```
 
    Siga as instruções para definir nome de usuário, e-mail e senha.
 
-7. **Inicie o servidor de desenvolvimento do Django**:
+8. **Inicie o Tailwind CSS**:
+	
+	```bash
+	python .\app\manage.py tailwind start
+	```
+
+8. **Inicie o servidor de desenvolvimento do Django**:
 
    ```bash
-   python manage.py runserver
+   python .\app\manage.py runserver
    ```
 
-8. **Acesse a aplicação**:
+9. **Acesse a aplicação**:
 
    Abra o navegador e vá até `http://127.0.0.1:8000/` para ver a aplicação rodando localmente.
 
@@ -129,10 +141,16 @@ Após a instalação e configuração do projeto, siga os passos abaixo para uti
 
 1. **Acesse o servidor local:**
    
+   Se o frontend não estiver em execução, inicie-o com o seguinte comando:
+   
+   ```bash
+	python .\app\manage.py tailwind start
+	```
+   
    Se o servidor não estiver em execução, inicie-o com o seguinte comando:
 
    ```bash
-   python manage.py runserver
+   python .\app\manage.py runserver
    ```
 
    Isso iniciará o servidor de desenvolvimento do Django no endereço `http://127.0.0.1:8000/`.
@@ -159,43 +177,72 @@ Após a instalação e configuração do projeto, siga os passos abaixo para uti
    
    Dependendo das funcionalidades do seu projeto, você poderá realizar operações como criar, editar ou excluir dados, visualizar informações e interagir com diferentes partes da aplicação através da interface web.
 
-5. **Parar o servidor:**
+5. **Parar o servidor e frontend:**
    
-   Para parar o servidor, basta pressionar **Ctrl + C** no terminal onde o servidor está rodando.
+   Para parar o servidor, basta pressionar **Ctrl + C** nos terminais onde o servidor e frontend estão rodando.
 
 ---
 
-## 🚀 Roadmap do Desenvolvimento  
-### **Fase 1 - MVP (Produto Mínimo Viável)**  
-- Funcionalidades principais: upload de documentos, geração automática de flashcards e interface básica.  
-- Lançamento para grupo limitado de usuários para testes e feedback.  
+### 📖 Documentação  
+A documentação completa do **FlashLearn** pode ser encontrada no nosso repositório oficial no GitHub. Ela inclui informações detalhadas sobre a instalação, uso da aplicação, APIs disponíveis e contribuições.  
 
-### **Fase 2 - Expansão de Funcionalidades**  
-- Adição de edição avançada, organização de flashcards e integração com APIs de arte.  
+Para acessar a documentação, visite:  
+[🔗 Repositório do FlashLearn](https://github.com/seacello/flashlearn)  
 
-### **Fase 3 - Escala e Finalização**  
-- Testes de carga e segurança, lançamento público e suporte técnico completo.  
+Caso tenha dúvidas ou precise de suporte adicional, consulte a seção de **Informações de Suporte** abaixo.  
 
 ---
 
-## 🛠️ Contribuindo  
-Contribuições são bem-vindas!  
-1. Faça um fork do projeto.  
-2. Crie uma branch para sua funcionalidade (`git checkout -b feature/nova-funcionalidade`).  
-3. Submeta um pull request para revisão.  
+### 🖼️ Imagens e Visuais
+Aqui estão algumas capturas de tela e exemplos da interface do **FlashLearn** para melhor compreensão do sistema:  
+
+📌 **Tela Inicial:** [inserir imagem]  
+📌 **Exemplo de Flashcard:** [inserir imagem]  
+
+Mais imagens e vídeos demonstrativos podem ser encontrados na nossa documentação oficial e no repositório do projeto.  
+
+---
+
+### 🆘 Informações de Suporte  
+Se você encontrar problemas ao usar o **FlashLearn**, temos várias formas de suporte disponíveis:  
+
+📬 **E-mail:** marcello.eam@gmail.com
+🐞 **Relatar um bug:** Abra uma issue no nosso [GitHub](https://github.com/seacello/flashlearn/issues)  
+
+A equipe está disponível para ajudar com dúvidas técnicas, sugestões de melhorias e correções de bugs.  
+
+---
+
+### 📌 Status do Projeto  
+O **FlashLearn** está atualmente na **Fase 4 - Deploy**. Estamos trabalhando no deploy final.  
+
+📅 **Última atualização:** 14/03/2025  
+🔜 **Próximas melhorias:**  
+✔️ Deploy com docker
+✔️ Github Actions  
+  
+---
+
+### 🤝 Diretrizes para Contribuição  
+Quer contribuir com o **FlashLearn**? Siga estas diretrizes para garantir um processo organizado e colaborativo:  
+
+1. **Leia a documentação** para entender o funcionamento do projeto.  
+2. **Abra uma issue** caso queira sugerir uma funcionalidade ou relatar um problema.  
+3. **Crie uma branch** para suas mudanças:  
+
+   ```bash
+   git checkout -b feature/minha-contribuicao
+   ```  
+
+4. **Faça um pull request** detalhando as alterações realizadas.  
+5. **Aguarde a revisão** e possíveis sugestões da equipe de desenvolvimento.  
+
+Agradecemos sua colaboração para tornar o **FlashLearn** ainda melhor! 🚀  
 
 ---
 
 ## 👥 Equipe de Desenvolvimento  
 - **Marcello Menezes** - Líder Técnico  
-- **Eduardo Santana** - Fullstack Developer  
-- **Rodrigo Sales** - Front-End Developer  
-- **Severino Murilo da Silva** - Back-End Developer  
+- **Eduardo Santana** - Fullstack Developer
+  
 ---
-
-
-## Apps Instalados
-user: Gerenciamento de usuários
-home: Página inicial
-flashcards: Sistema de flashcards
-gpt: Integração com GPT
