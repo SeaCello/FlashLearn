@@ -1,43 +1,57 @@
-# Imagem base Python
-FROM python:3.10-slim
+# Etapa 1: Build
+FROM python:3.10-slim AS builder
 
-# Definir variáveis de ambiente
+# Variáveis de ambiente ESSENCIAIS para instalação de devDependencies
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
-    NPM_BIN_PATH=/usr/bin/npm \
-    NODE_ENV=production
+    NODE_ENV=development \
+    NPM_BIN_PATH=/usr/bin/npm
 
-# Instalar Node.js e npm (necessário para o Tailwind)
-RUN apt-get update && apt-get install -y \
-    nodejs \
-    npm \
+WORKDIR /app
+
+# Instalar dependências de sistema e Node.js
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
     build-essential \
+    git \
+    && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt-get install -y nodejs \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Criar e definir diretório de trabalho
-WORKDIR /app
-
 # Copiar requirements e instalar dependências Python
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Copiar o projeto
 COPY . .
 
-# Instalar e compilar o Tailwind CSS
-WORKDIR /app/app
-RUN python manage.py tailwind install
-RUN python manage.py tailwind build
+# Instalar dependências do Node.js (INCLUINDO devDependencies) e compilar Tailwind
+WORKDIR /app/app/theme/static_src  
+RUN npm install --include=dev && npm run build
 
-# Configurar o banco de dados
-RUN python manage.py migrate
 
-# Coletar arquivos estáticos
-RUN python manage.py collectstatic --noinput
+WORKDIR /app/app 
 
-# Porta que a aplicação vai usar
+# Comandos do Django
+RUN python manage.py migrate && python manage.py collectstatic --noinput
+
+
+# Etapa 2: Imagem final de produção
+FROM python:3.10-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    NODE_ENV=production 
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt && pip install gunicorn
+
+# Copiar apenas o necessário do builder
+COPY --from=builder /app /app
+
 EXPOSE 8000
 
-# Comando para iniciar a aplicação
 CMD ["gunicorn", "--chdir", "/app/app", "webapp.wsgi:application", "--bind", "0.0.0.0:8000"]

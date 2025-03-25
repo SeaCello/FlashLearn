@@ -1,11 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from fpdf import FPDF
 from django.contrib.auth.decorators import login_required
 from .services import FlashcardService, PDFService
 from .models import UserFlashcard
 from .forms import CreateCardForm
-
 
 
 @login_required
