@@ -8,7 +8,9 @@
         <div class="col-lg-10">
             <h1
                 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                Bem-vindo, {{user.username}}!</h1>
+                Bem-vindo, <span class="text-orange-500">{{user.username}}</span>!
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300">O que vamos aprender hoje?</p>
         </div>
     </div>
 
@@ -28,7 +30,7 @@
                         Revise e gerencie sua coleção atual
                     </p>
                     <a href="{% url 'flashcards:my_flashcards' %}"
-                        class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                        class="btn-pulse inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                         Acessar Coleção <i class="fas fa-arrow-right ms-2"></i>
                     </a>
                 </div>
@@ -49,7 +51,7 @@
                         Comece um novo conjunto de estudos com nossa IA
                     </p>
                     <a href="{% url 'flashcards:create_flashcards' %}"
-                        class="inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
+                        class="btn-pulse inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                         Novo Flashcard <i class="fas fa-magic ms-2"></i>
                     </a>
                 </div>
@@ -74,6 +76,33 @@
 
         .card-body {
             padding: 1.5rem;
+        }
+
+        /* Animação de pulso nos botões */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+            }
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 10px rgba(249, 115, 22, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(249, 115, 22, 0);
+            }
+        }
+
+        .btn-pulse {
+            animation: pulse 2s infinite;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .btn-pulse:hover {
+            animation: none;
+            transform: scale(1.02);
         }
     </style>
 </div>
