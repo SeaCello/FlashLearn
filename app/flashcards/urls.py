@@ -8,4 +8,5 @@ urlpatterns = [
     path('user/flashcards/', views.meus_flashcards, name='my_flashcards'),# change latter to show flashcards
     path('user/flashcards/create', views.create_flashcards, name='create_flashcards'), # create flashcards
     path('user/flashcards/download_pdf', views.download_pdf, name='download_pdf'), # download flashcards
+    path('excluir/<int:flashcard_id>/', views.excluir_flashcard, name='excluir_flashcard'), # delete flashcards
 ]
