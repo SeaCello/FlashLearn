@@ -15,10 +15,9 @@
     </div>
 
     <!-- Formulário -->
-    <div class="row gx-4 gx-lg-5 justify-content-center">
-        <div class="col-lg-16 max-w-7xl	 mx-auto">
+    <div class="col-span-3 w-full max-w-7xl mx-auto">
             <div class="card shadow-lg hover-card">
-                <div class="card-body py-5 px-4 md:px-6">
+                <div class="card-body py-8 px-4 md:px-6">
                     <div class="flashcard-visual mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" class="h-24 w-48 mx-auto">
                             <!-- Flashcard 1 (esquerda) -->
@@ -60,10 +59,10 @@
                     <form method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="font-[sans-serif] text-left">
-                            <p class="card-text text-muted mb-4">Selecione um arquivo para começar</p>
+                            <p class="card-text text-gray-900 dark:text-gray-100 mb-2 text-lg">
+                                Selecione um arquivo para começar</p>
                             {{ form|crispy }}
-                            <p class="text-xs text-gray-400 mt-2">Formatos aceitos: PDF, TXT, DOCX até 5MB</p>
-                        </div>
+                            <p class="text-sm text-gray-500 mt-3">Formatos aceitos: PDF, TXT, DOCX até 5MB</p>                        </div>
                         <button type="submit" 
                         class="btn-pulse mt-6 inline-block px-6 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600">
                         Gerar Flashcards
@@ -88,7 +87,6 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {% for flashcard in flashcards %}
-                    <!-- Modificado para tons de laranja diferentes e bordas retangulares -->
                     <div class="card hover-card p-6 shadow-lg mb-4 bg-orange-400 text-white dark:bg-orange-900">
                         <input type="hidden" name="flashcard_id" value="{{ flashcard.id }}">
                         <textarea class="flashcard-title w-full min-h-[60px] bg-transparent border-0 font-extrabold text-lg mb-2 text-black dark:text-white placeholder-gray-700 dark:placeholder-gray-300"
