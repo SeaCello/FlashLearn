@@ -1,6 +1,86 @@
 {% extends "base.html" %}
+{% load static %}
 {% block content %}
-<div class="grid h-screen place-items-center text-center">
-    <h1 class="animate-pulse text-9xl font-bold text-orange-600">FlashLearn</h1>
+<div class="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <!-- Efeito de fundo dinâmico -->
+    <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-orange-500/10 to-transparent dark:from-orange-800/20"></div>
+        <div class="absolute inset-0 animate-pulse-slow bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxmaWx0ZXIgaWQ9ImIiPjxmZVR1cmJ1bGVuY2UgdHlwZT0iZnJhY3RhbE5vaXNlIiBiYXNlRnJlcXVlbmN5PSIuNSIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMSAwIDAgMCAwIDAgMSAwIDAgMCAwIDAgMSAwIDAgMCAwIDAgLjUgMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNiKSIgb3BhY2l0eT0iLjEiLz48L3N2Zz4=')]"></div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="relative z-10 text-center space-y-8 px-4">
+        <!-- Logo e título -->
+        <div class="flex items-center justify-center gap-4">
+            <img src="{% static 'images/Logo.jpeg' %}" alt="FlashLearn Logo" class="h-20 animate-float">
+            <h1 class="text-7xl md:text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 animate-text-glow">
+                FlashLearn
+            </h1>
+        </div>
+
+        <!-- Subtítulo animado -->
+        <p class="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 max-w-2xl mx-auto animate-slide-up">
+            Transforme seu aprendizado com flashcards inteligentes gerados por IA
+            <span class="inline-block ml-2">🚀</span>
+        </p>
+        
+    </div>
 </div>
+
+<style>
+    @keyframes text-glow {
+        0%, 100% { text-shadow: 0 0 10px rgba(249, 115, 22, 0.5); }
+        50% { text-shadow: 0 0 30px rgba(249, 115, 22, 0.8); }
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @keyframes pulse-slow {
+        0%, 100% { opacity: 0.05; }
+        50% { opacity: 0.1; }
+    }
+
+    @keyframes bounce-horizontal {
+        0%, 100% { transform: translateX(0); }
+        50% { transform: translateX(8px); }
+    }
+
+    @keyframes slide-up {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    
+    .animate-text-glow {
+        animation: text-glow 6s ease-in-out infinite;
+    }
+
+    .animate-float {
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 6s ease-in-out infinite;
+    }
+
+    .animate-bounce-horizontal {
+        animation: bounce-horizontal 1.5s ease-in-out infinite;
+    }
+
+    .animate-slide-up {
+        animation: slide-up 0.8s ease-out forwards;
+        opacity: 0;
+    }
+
+    .delay-300 {
+        animation-delay: 300ms;
+    }
+
+    .shadow-orange-500/30 {
+        box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.3);
+    }
+</style>
 {% endblock %}
