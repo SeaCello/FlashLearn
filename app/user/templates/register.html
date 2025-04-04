@@ -12,11 +12,14 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                     Crie sua conta
                 </h1>
-                <form method="POST" class="space-y-4 md:space-y-6" action="">
+                
+                <form method="POST" class="space-y-4 md:space-y-6">
                     {% csrf_token %}
-                    {% crispy form %}
+                    {{ form|crispy }}
+                    <button type="submit" class="w-full text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cadastrar</button>
+                    
                     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                        Já tem uma conta? <a href="{% url 'login' %}" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Faça login</a>
+                        Já tem uma conta? <a href="{% url 'login' %}" class="font-medium text-orange-600 hover:underline dark:text-orange-500">Faça login</a>
                     </p>
                 </form>
             </div>

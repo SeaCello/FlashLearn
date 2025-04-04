@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from .services import FlashcardService, PDFService
@@ -113,3 +114,33 @@ def download_pdf(request):
     
     except Exception as e:
         return HttpResponse(f"Erro na geração do PDF: {str(e)}", status=500)
+    
+@login_required
+def excluir_flashcard(request, flashcard_id):
+    """
+    Deletes a flashcard based on its ID.
+    
+    This view retrieves the flashcard with the given ID and deletes it from the database.
+    If the flashcard is successfully deleted, a success message is returned.
+    If the flashcard is not found, an error message is returned.
+    """
+    
+    try:
+        flashcard = UserFlashcard.objects.get(id=flashcard_id, user=request.user)
+        titulo = flashcard.title
+        flashcard.delete()
+        
+        # Verificar se é uma requisição AJAX
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'status': 'success', 'message': f'Flashcard "{titulo}" excluído com sucesso.'})
+        else:
+            # Para solicitações normais, adicione uma mensagem e redirecione
+            messages.success(request, f'Flashcard "{titulo}" excluído com sucesso.')
+            return redirect('flashcards:meus_flashcards')
+    
+    except UserFlashcard.DoesNotExist:
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'status': 'error', 'message': 'Flashcard não encontrado.'}, status=404)
+        else:
+            messages.error(request, 'Flashcard não encontrado.')
+            return redirect('flashcards:meus_flashcards')
